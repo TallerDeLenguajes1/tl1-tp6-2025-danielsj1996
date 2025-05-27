@@ -1,13 +1,17 @@
 ﻿// See https://aka.ms/new-console-template for more information
-/*Ejercicio 2. Ingrese al branch CalculadoraV1 y construya un programa que sea una
-calculadora que permita al usuario realizar las 4 operaciones básicas (Sumar, Restar,
-Multiplicar y Dividir) a partir de un menú para seleccionar la opción a elegir y que luego
-pida dos números y que devuelva el resultado de la operación seleccionada. Además
-una vez que termine de realizar la operación le pregunte si desea realizar otro cálculo.*/
+/*Ejercicio 3. Ingrese al Branch CalculadoraV2 para implementar las mejoras en la
+calculadora.. Solicite al usuario un número y muestre por pantalla:
+● El valor absoluto de un número
+● El cuadrado
+● La raíz cuadrada
+● El seno
+● El Coseno
+● La parte entera de un tipo float.
+*/
 string respuesta;
 do
 {
- Console.Clear(); // Limpia la pantalla antes de mostrar el menú
+    Console.Clear(); // Limpia la pantalla antes de mostrar el menú
     int opcion = MostrarMenu();
     switch (opcion)
     {
@@ -27,14 +31,18 @@ do
 
             break;
         case 5:
+            Adicionales();
+
+            break;
+        case 6:
             Console.WriteLine("Saliendo del programa.....");
             break;
         default:
             Console.WriteLine("opcion no válida.");
             break;
     }
-            Console.Write("¿Desea realizar otra operación? (s/n): ");
-            respuesta = Console.ReadLine().ToLower();
+    Console.Write("¿Desea realizar otra operación? (s/n): ");
+    respuesta = Console.ReadLine().ToLower();
 
 } while (respuesta == "s");
 
@@ -47,7 +55,8 @@ int MostrarMenu()
     Console.WriteLine(" 2) RESTA");
     Console.WriteLine(" 3) MULTIPLICACIÓN");
     Console.WriteLine(" 4) DIVISIÓN");
-    Console.WriteLine(" 5) SALIR");
+    Console.WriteLine(" 5) OPERACIONES ADICIONALES");
+    Console.WriteLine(" 6) Salir");
     Console.Write("Opción: ");
 
     if (int.TryParse(Console.ReadLine(), out int opcion))
@@ -95,10 +104,37 @@ void RealizarDivision()
     }
 }
 
+void Adicionales()
+{
+
+    int numero = LeerNumero("Ingrese el numero para realizar las operaciones adicionales: ");
+
+    Console.WriteLine($"Valor Absoluto =" + Math.Abs(numero));
+
+    Console.WriteLine($"Cuadrado = " + Math.Pow(numero, 2));
+    if (numero >= 0)
+    {
+        Console.WriteLine($"Raiz Cuadrada = " + Math.Sqrt(numero));
+
+    }
+    else
+    {
+        Console.WriteLine("No es posible calcular (numero negativo)");
+    }
+
+    double radianes = numero * (Math.PI / 180);
+    Console.WriteLine($"Seno (grados): {Math.Sin(radianes)}");
+    Console.WriteLine($"Coseno (grados): {Math.Cos(radianes)}");
+
+    double numero2 = 0;
+    double.TryParse(Console.ReadLine(), out numero2);
+    Console.WriteLine($"Parte entera (Truncada): {Math.Truncate(numero2)}");
+}
+
 static int LeerNumero(string mensaje)
 {
     Console.Write(mensaje);
-    int numero=0;
+    int numero = 0;
     while (!int.TryParse(Console.ReadLine(), out numero))
     {
         Console.Write("Entrada inválida. Intente de nuevo: ");
