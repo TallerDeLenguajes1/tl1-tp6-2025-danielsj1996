@@ -42,7 +42,3 @@ while (!esNumeroValido || numero <= 0)
         original /= 10;
     }
     Console.WriteLine($"Numero Invertido: {invertido}");
-
-    
-
-
